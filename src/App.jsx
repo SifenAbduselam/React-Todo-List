@@ -20,6 +20,24 @@ const [todos, setTodos] = useState([]);
 
    }
 
+ function toggleTodo(id, completed) {
+  setTodos(currentTodos => {
+    return currentTodos.map(todo => {
+      if(todo.id === id) {
+        return {...todo, completed}
+      }
+
+      return 
+    })
+  })
+ }
+
+ function deleteTodo(id) {
+  setTodos(currentTodos => {
+    return currentTodos.filter(todo => todo.id !== id)
+  })
+ }
+
 
   return(
     <>
@@ -36,10 +54,11 @@ const [todos, setTodos] = useState([]);
 return(
 <li key={todo.id}>
           <label>
-            <input type="checkbox" checked={todo.completed} />
+            <input type="checkbox" checked={todo.completed}
+            onChange={ e => toggleTodo(todo.id, e.target.checked) } />
             {todo.title}
           </label>
-          <button className="btn btn-danger">Delete</button>
+          <button onClick ={() => deleteTodo(todo.id)} className="btn btn-danger">Delete</button>
         </li>
 )
 })}     
